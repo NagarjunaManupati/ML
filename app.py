@@ -37,6 +37,17 @@ target_column = st.text_input(
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
+    st.success(f"✅ Dataset uploaded successfully! Shape: {df.shape}")
+                
+    # Display dataset info
+    with st.expander("📊 Dataset Preview", expanded=False):
+        st.dataframe(df.head(10), use_container_width=True)
+        
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Rows", df.shape[0])
+        col2.metric("Columns", df.shape[1])
+        col3.metric("Features", df.shape[1] - 1)
+    
     #df = pd.read_csv(uploaded_file, sep=';')
     # REQUIRED_COLUMNS = {
     #     'age','gender','height','weight','ap_hi','ap_lo',
@@ -85,6 +96,7 @@ if uploaded_file:
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
         st.pyplot(fig)
+
 
 
 
