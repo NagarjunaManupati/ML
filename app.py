@@ -36,8 +36,8 @@ target_column = st.text_input(
 )
 
 if uploaded_file:
-    df = pd.read_csv(uploaded_file, sep=';')
-
+    df = pd.read_csv(uploaded_file)
+    #df = pd.read_csv(uploaded_file, sep=';')
     # REQUIRED_COLUMNS = {
     #     'age','gender','height','weight','ap_hi','ap_lo',
     #     'cholesterol','gluc','smoke','alco','active','cardio'
@@ -85,4 +85,5 @@ if uploaded_file:
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
         st.pyplot(fig)
+
 
