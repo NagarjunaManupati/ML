@@ -31,7 +31,7 @@ model_name = st.selectbox(
 # Target column input
 target_column = st.text_input(
     "Target Column Name",
-    value="target",
+    value="HeartDisease",
     help="Enter the name of your target/label column"
 )
 
@@ -85,5 +85,6 @@ if uploaded_file:
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
         st.pyplot(fig)
+
 
 
