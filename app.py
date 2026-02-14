@@ -28,21 +28,30 @@ model_name = st.selectbox(
      "Naive Bayes", "Random Forest", "XGBoost"]
 )
 
+# Target column input
+target_column = st.text_input(
+    "Target Column Name",
+    value="target",
+    help="Enter the name of your target/label column"
+)
+
 if uploaded_file:
     df = pd.read_csv(uploaded_file, sep=';')
 
-    REQUIRED_COLUMNS = {
-        'age','gender','height','weight','ap_hi','ap_lo',
-        'cholesterol','gluc','smoke','alco','active','cardio'
-    }
+    # REQUIRED_COLUMNS = {
+    #     'age','gender','height','weight','ap_hi','ap_lo',
+    #     'cholesterol','gluc','smoke','alco','active','cardio'
+    # }
 
-    if not REQUIRED_COLUMNS.issubset(df.columns):
-        st.error("❌ Invalid dataset. Upload Cardiovascular Disease CSV only.")
-        st.stop()
+    # if not REQUIRED_COLUMNS.issubset(df.columns):
+    #     st.error("❌ Invalid dataset. Upload Cardiovascular Disease CSV only.")
+    #     st.stop()
 
-    df['age'] = df['age'] / 365.25
-    X = df.drop('cardio', axis=1)
-    y = df['cardio']
+    # df['age'] = df['age'] / 365.25
+    # X = df.drop('cardio', axis=1)
+    # y = df['cardio']
+    X = df.drop(target_column, axis=1)
+    y = df[target_column]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
@@ -76,3 +85,4 @@ if uploaded_file:
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
         st.pyplot(fig)
+
